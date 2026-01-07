@@ -35,7 +35,7 @@ const GuestsYes = () => {
 
   return (
     <Layout>
-      {/* HEADER */}
+   
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -68,7 +68,7 @@ const GuestsYes = () => {
         </div>
       </motion.div>
 
-      {/* FILTERS */}
+     
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -107,7 +107,7 @@ const GuestsYes = () => {
         ))}
       </motion.div>
 
-      {/* LIST */}
+    
       <div className="row g-4">
         {filteredGuests.map((g) => (
           <motion.div
@@ -156,7 +156,7 @@ const GuestsYes = () => {
         ))}
       </div>
 
-      {/* BACK */}
+   
       <div className="text-center mt-5">
         <Link
           to="/"
