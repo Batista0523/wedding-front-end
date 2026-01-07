@@ -31,32 +31,27 @@ const Home = () => {
 
   return (
     <Layout>
-     
       <WelcomeSection />
 
-     
       <MarriageFaithSection />
 
-     
       <EventInfoCard />
 
       <TravelNote />
 
-    
       {!confirmed && (
-        <><div className="text-center my-5">
-  <span
-    style={{
-      display: "inline-block",
-      width: 60,
-      height: 2,
-      backgroundColor: "#B89B5E",
-      opacity: 0.5,
-    }}
-  />
-</div>
-
-
+        <>
+          <div className="text-center my-5">
+            <span
+              style={{
+                display: "inline-block",
+                width: 60,
+                height: 2,
+                backgroundColor: "#B89B5E",
+                opacity: 0.5,
+              }}
+            />
+          </div>
 
           <SearchGuest onSelect={handleSelectGuest} />
           {selectedGuest && (
@@ -65,13 +60,14 @@ const Home = () => {
         </>
       )}
 
-   
       {confirmed && finalStatus && <ConfirmationSuccess status={finalStatus} />}
 
-     
+      <p className="text-center text-muted mt-4">
+        Agradeceríamos nos confirmes tu asistencia antes del{" "}
+        <strong>26 de enero de 2026</strong>.
+      </p>
       <div className="text-center mt-5">
         <p className="text-muted mb-3">Resumen de respuestas</p>
-
         <Link
           to="/yes"
           style={{

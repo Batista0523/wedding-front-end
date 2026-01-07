@@ -73,9 +73,9 @@ const RSVPForm = ({ guest, onSuccess }: Props) => {
               <option value="no">No</option>
               <option value="yes">Sí</option>
             </select>
-             <small className="text-muted d-block mt-2">
-    La invitación es válida para un solo acompañante.
-  </small>
+            <small className="text-muted d-block mt-2">
+              La invitación es válida para un solo acompañante.
+            </small>
           </div>
 
           {hasPlusOne && (
