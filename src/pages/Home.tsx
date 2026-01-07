@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import WelcomeSection from "../components/WelcomeSection";
 import MarriageFaithSection from "../components/MarriageFaithSection";
@@ -13,9 +13,34 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const [selectedGuest, setSelectedGuest] = useState<Guest | null>(null);
   const [confirmed, setConfirmed] = useState(false);
+  const [apiReady, setApiReady] = useState<boolean | null>(null);
+
   const [finalStatus, setFinalStatus] = useState<
     "confirmed" | "declined" | null
   >(null);
+useEffect(() => {
+  const checkAPI = async () => {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 3000);
+
+      await fetch(import.meta.env.VITE_BASE_URL, {
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeout);
+      setApiReady(true);
+    } catch {
+      setApiReady(false);
+    }
+  };
+
+  checkAPI(); 
+  const interval = window.setInterval(checkAPI, 4000);
+
+  return () => clearInterval(interval);
+}, []);
+
 
   const handleSelectGuest = (guest: Guest) => {
     setSelectedGuest(guest);
@@ -51,6 +76,46 @@ const Home = () => {
                 opacity: 0.5,
               }}
             />
+          </div>
+          <div className="text-center my-4">
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.6rem",
+                padding: "0.6rem 1.2rem",
+                borderRadius: 30,
+                backgroundColor: "#fff",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+              }}
+            >
+              <span
+                style={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  backgroundColor:
+                    apiReady === null
+                      ? "#ccc"
+                      : apiReady
+                      ? "#4CAF50"
+                      : "#E53935",
+                }}
+              />
+
+              <span
+                style={{
+                  fontSize: "0.9rem",
+                  color: "#555",
+                }}
+              >
+                {apiReady === null && "Conectando con el sistema…"}
+                {apiReady === false &&
+                  "Sistema despertando, por favor espera unos segundos"}
+                {apiReady === true &&
+                  "Sistema listo, por favor ingresa tu nombre"}
+              </span>
+            </div>
           </div>
 
           <SearchGuest onSelect={handleSelectGuest} />
