@@ -142,7 +142,7 @@ useEffect(() => {
             marginRight: "1.5rem",
           }}
         >
-          Asistencias confirmadas
+          Presentes
         </Link>
 
         <Link
@@ -153,7 +153,7 @@ useEffect(() => {
             fontWeight: 500,
           }}
         >
-          Respuestas no confirmadas
+          Ausentes
         </Link>
       </div>
     </Layout>
