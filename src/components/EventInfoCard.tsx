@@ -24,7 +24,7 @@ const EventInfoCard = () => {
       <div className="text-center">
         <h6 className="fw-semibold">Compartir especial</h6>
         <p className="text-muted mb-1">Salón de Eventos José Noel</p>
-        <p className="text-muted">Guayabal, Santiago</p>
+        <p className="text-muted">Entrada Estancia Nueva, Santiago</p>
         <p className="text-muted mb-1">21 de febrero de 2026 · 6:30 PM</p>
       </div>
     </div>
