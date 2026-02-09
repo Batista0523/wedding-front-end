@@ -1,25 +1,26 @@
 import { Droppable } from "@hello-pangea/dnd";
 import type { Guest } from "../types/guest";
 import DraggableGuest from "./DraggableGuest";
+
 interface Props {
   id: string;
   title: string;
   guests: Guest[];
+  isAdmin: boolean;
 }
 
-const TableColumn = ({ id, title, guests }: Props) => {
+const TableColumn = ({ id, title, guests, isAdmin }: Props) => {
   return (
     <div
       className="bg-light p-3"
       style={{
         width: 280,
-        minHeight: 200,
         borderRadius: 18,
       }}
     >
       <h6 className="text-center fw-bold mb-3">{title}</h6>
 
-      <Droppable droppableId={id}>
+      <Droppable droppableId={id} isDropDisabled={!isAdmin}>
         {(provided) => (
           <div
             ref={provided.innerRef}
@@ -32,7 +33,12 @@ const TableColumn = ({ id, title, guests }: Props) => {
             }}
           >
             {guests.map((guest, index) => (
-              <DraggableGuest key={guest.id} guest={guest} index={index} />
+              <DraggableGuest
+                key={guest.id}
+                guest={guest}
+                index={index}
+                isAdmin={isAdmin}
+              />
             ))}
             {provided.placeholder}
           </div>
