@@ -1,24 +1,25 @@
 import { Droppable } from "@hello-pangea/dnd";
-import type { Guest } from "../types/guest";
 import DraggableGuest from "./DraggableGuest";
+import type { Guest } from "../types/guest";
 
 interface Props {
   id: string;
   title: string;
   guests: Guest[];
   isAdmin: boolean;
+  onRemoveGuest: (guestId: string) => void;
 }
 
-const TableColumn = ({ id, title, guests, isAdmin }: Props) => {
+const TableColumn = ({
+  id,
+  title,
+  guests,
+  isAdmin,
+  onRemoveGuest,
+}: Props) => {
   return (
-    <div
-      className="bg-light p-3"
-      style={{
-        width: 280,
-        borderRadius: 18,
-      }}
-    >
-      <h6 className="text-center fw-bold mb-3">{title}</h6>
+    <div style={{ width: 260 }}>
+      <h6 className="text-center mb-2">{title}</h6>
 
       <Droppable droppableId={id} isDropDisabled={!isAdmin}>
         {(provided) => (
@@ -27,17 +28,19 @@ const TableColumn = ({ id, title, guests, isAdmin }: Props) => {
             {...provided.droppableProps}
             style={{
               minHeight: 120,
-              maxHeight: id === "unassigned" ? 420 : "auto",
-              overflowY: id === "unassigned" ? "auto" : "visible",
-              paddingRight: id === "unassigned" ? 4 : 0,
+              padding: 12,
+              borderRadius: 16,
+              backgroundColor: "#fafafa",
+              border: "1px solid rgba(0,0,0,0.05)",
             }}
           >
-            {guests.map((guest, index) => (
+            {guests.map((g, index) => (
               <DraggableGuest
-                key={guest.id}
-                guest={guest}
+                key={g.id}
+                guest={g}
                 index={index}
                 isAdmin={isAdmin}
+                onRemove={onRemoveGuest}
               />
             ))}
             {provided.placeholder}
