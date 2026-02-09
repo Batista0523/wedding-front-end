@@ -63,7 +63,7 @@ interface Props {
   onAssign: (guest: Guest, tableId: string) => void;
 }
 
-const TableColumn = ({ id, title, guests, isAdmin, onAssign }: Props) => {
+const TableColumn = ({  title, guests, isAdmin, onAssign }: Props) => {
   return (
     <div
       style={{
